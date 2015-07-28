@@ -1,0 +1,124 @@
+<!doctype html>
+
+<html ng-app="pplug">
+
+<head>
+  <title>positive star</title>
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <style type="text/css">
+
+  .row{
+    background-color: rgb(200, 255, 200);
+    color: black;
+    text-align: center;
+    border-color: black;
+    border-width: 10px;
+    
+  }
+
+  .hide {
+    visibility: none;
+  }
+
+  .small-image{
+    max-height: 200px;
+    max-width: 200px;
+  }
+
+
+  </style>
+</head>   
+
+
+<body ng-controller="PplugController as pplug">
+
+<!-- <section ng-controller="PanelController as panel">
+  <ul class="nav nav-pills">
+    <li ng-class="{ active : panel.isSelected(1) }"><a href ng-click="panel.selectTab(1)">Descs</a></li>
+    <li ng-class="{ active : panel.isSelected(2) }"><a href ng-click="panel.selectTab(2)">Specs</a></li>
+    <li ng-class="{ active : panel.isSelected(3) }"><a href ng-click="panel.selectTab(3)">Revvs</a></li>
+    <li href ng-click="panel.selectTab(1)"><a href >{{panel.tab}}</a></li>
+  </ul>
+</section> -->
+  <!-- <div ng-hide="pplug.product.soldOut" class="container-fluid">
+
+    <div class="row">
+      <H1 class="col-sm-4"> {{pplug.product.name}}</H1>
+      <H2 class="col-sm-4"> {{pplug.product.price}} </H2>
+      <P class="col-sm-4"> {{pplug.product.description}}</P>
+    </div>
+    <button ng-show="pplug.product.canPurchase" class="btn btn-primary" type="submit">Add to Cart</button>
+    <button ng-hide="pplug.product.canPurchase" class="btn btn-default disabled" type="submit">Add to Cart</button>
+
+  </div> -->
+
+  <div ng-repeat="product in pplug.products | orderBy:'-price'" class="container-fluid">
+
+    <div class="row">
+      <H1 class="col-sm-3"> {{product.name}}</H1>
+      <H2 class="col-sm-3"> {{product.price | currency}} </H2>
+      <P class="col-sm-3"> {{product.description}}</P>
+      <li class="small-image pull-left thumbnail col-sm-3" >
+        <img ng-src="{{product.image}}" />
+      </li>
+    </div>
+    
+    <button ng-show="product.canPurchase" class="btn btn-primary" type="submit">Add to Cart</button>
+    <button ng-hide="product.canPurchase" class="btn btn-default disabled" type="submit">Add to Cart</button>
+
+     <!-- <button class="btn" ng-class="{'disabled': !product.canPurchase, 'btn-default': !product.canPurchase, 'btn-primary': product.canPurchase}" type="submit">Add 2 Cart</button> -->
+
+    <section ng-controller="PanelController as panel">
+      <ul class="nav nav-pills">
+        <li ng-class="{ active : panel.isSelected(1) }"><a href ng-click="panel.selectTab(1)">Descs</a></li>
+        <li ng-class="{ active : panel.isSelected(2) }"><a href ng-click="panel.selectTab(2)">Specs</a></li>
+        <li ng-class="{ active : panel.isSelected(3) }"><a href ng-click="panel.selectTab(3)">Revvs</a></li>
+        <li href ng-click="panel.selectTab(1)"><a href >{{panel.tab}}</a></li>
+      </ul>
+    
+
+      <div class="panel" ng-show="panel.isSelected(3)">
+
+        <h4>Reviews</h4>
+        <li ng-repeat="review in product.reviews">
+          <blockquote>
+            <b>Stars: {{review.stars}}</b>
+              {{review.body}}
+              <cite>by: {{review.author}}</cite>
+          </blockquote>
+        </li>
+        <form name="reviewForm">
+          <select ng-model="review.stars">
+            <option value="1">1 star</option>
+            <option value="2">2 stars</option>
+            <option value="3">3 stars</option>
+            <option value="4">4 stars</option>
+            <option value="4">5 stars</option>
+          </select>
+          <textarea ng-model="review.body"></textarea>
+          <label>by:</label>
+          <input ng-model="review.author" type="email"/>
+          <input type="submit" value="Submit" />
+
+          <input ng-model="review.color" type="radio" value="red">r</input>
+          <input ng-model="review.color" type="radio" value="green">g</input>
+          <input ng-model="review.color" type="radio" value="blue">b</input>
+
+          <input ng-model="review.terms" type="checkbox">i agree to terms</input>
+
+          <p>{{review.color}}</p>
+        </form>
+
+      </div>
+
+    </section>
+
+  </div>
+
+  <script type="text/javascript" src="js/angular.min.js"></script>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="app.js"></script>
+</body>
+
+</html>
