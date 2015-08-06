@@ -1,9 +1,9 @@
 <!doctype html>
 
-<html ng-app="pplug">
+<html ng-app="store">
 
 <head>
-  <title>positive star</title>
+  <title>.net ang class</title>
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
   <style type="text/css">
 
@@ -25,12 +25,21 @@
     max-width: 200px;
   }
 
+  .ng-invalid.ng-dirty {
+    border-color: #FA787E;
+    border-width: 5px;
+  }
+
+  .ng-valid.ng-dirty {
+    border-color: green;/*#78FA89;*/
+    border-width: 5px;
+  }
 
   </style>
 </head>   
 
 
-<body ng-controller="PplugController as pplug">
+<body ng-controller="StoreController as store">
 
 <!-- <section ng-controller="PanelController as panel">
   <ul class="nav nav-pills">
@@ -52,7 +61,7 @@
 
   </div> -->
 
-  <div ng-repeat="product in pplug.products | orderBy:'-price'" class="container-fluid">
+  <div ng-repeat="product in store.products | orderBy:'-price'" class="container-fluid">
 
     <div class="row">
       <H1 class="col-sm-3"> {{product.name}}</H1>
@@ -84,29 +93,33 @@
           <blockquote>
             <b>Stars: {{review.stars}}</b>
               {{review.body}}
-              <cite>by: {{review.author}}</cite>
+              <cite>by: {{review.author}} on {{review.createdOn | date:'MM/dd/yyyy @ h:mma'}}</cite>
           </blockquote>
         </li>
-        <form name="reviewForm">
-          <select ng-model="review.stars">
+
+        <form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
+          <select ng-model="reviewCtrl.review.stars" required>
             <option value="1">1 star</option>
             <option value="2">2 stars</option>
             <option value="3">3 stars</option>
             <option value="4">4 stars</option>
             <option value="4">5 stars</option>
           </select>
-          <textarea ng-model="review.body"></textarea>
+
+          <textarea ng-model="reviewCtrl.review.body" required></textarea>
           <label>by:</label>
-          <input ng-model="review.author" type="email"/>
+
+          <input name="author" ng-model="reviewCtrl.review.author" type="email" required/>
+
+          <div> reviewForm is {{reviewForm.$valid}}</div>
           <input type="submit" value="Submit" />
+<!-- 
+          <input ng-model="reviewCtrl.review.color" type="radio" value="red">r</input>
+          <input ng-model="reviewCtrl.review.color" type="radio" value="green">g</input>
+          <input ng-model="reviewCtrl.review.color" type="radio" value="blue">b</input>
 
-          <input ng-model="review.color" type="radio" value="red">r</input>
-          <input ng-model="review.color" type="radio" value="green">g</input>
-          <input ng-model="review.color" type="radio" value="blue">b</input>
+          <input ng-model="reviewCtrl.review.terms" type="checkbox">i agree to terms</input> -->
 
-          <input ng-model="review.terms" type="checkbox">i agree to terms</input>
-
-          <p>{{review.color}}</p>
         </form>
 
       </div>

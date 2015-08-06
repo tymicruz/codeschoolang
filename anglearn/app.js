@@ -1,8 +1,8 @@
 (function(){
 
-	var app = angular.module('pplug', []);
+	var app = angular.module('store', []);
 
-	app.controller('PplugController', function(){ 
+	app.controller('StoreController', function(){ 
 		this.products = gems;
 
 	});
@@ -19,6 +19,19 @@
 		{
 			this.tab = setTab;
 		};
+
+	});
+
+	app.controller('ReviewController', function(){
+
+		this.review = {};
+
+		this.addReview = function(product) {
+			this.review.createdOn = Date.now();
+			product.reviews.push(this.review);
+			this.review = {};
+		};
+
 
 	});
 
