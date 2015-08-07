@@ -1,13 +1,13 @@
 (function(){
 
-	var app = angular.module('store', []);
+	var app = angular.module('store', ['store-products']);
 
 	app.controller('StoreController', function(){ 
 		this.products = gems;
 
 	});
 
-	app.controller('PanelController', function(){ 
+	/*app.controller('PanelController', function(){ 
 		this.tab = 0;
 
 		this.isSelected = function(checkTab)
@@ -20,7 +20,7 @@
 			this.tab = setTab;
 		};
 
-	});
+	});*/
 
 	app.controller('ReviewController', function(){
 
@@ -34,6 +34,8 @@
 
 
 	});
+
+
 
 	var gems= [{
 		name: "fold",

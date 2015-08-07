@@ -3,7 +3,7 @@
 <html ng-app="store">
 
 <head>
-  <title>.net ang class</title>
+  <title>ang man</title>
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
   <style type="text/css">
 
@@ -77,54 +77,7 @@
 
      <!-- <button class="btn" ng-class="{'disabled': !product.canPurchase, 'btn-default': !product.canPurchase, 'btn-primary': product.canPurchase}" type="submit">Add 2 Cart</button> -->
 
-    <section ng-controller="PanelController as panel">
-      <ul class="nav nav-pills">
-        <li ng-class="{ active : panel.isSelected(1) }"><a href ng-click="panel.selectTab(1)">Descs</a></li>
-        <li ng-class="{ active : panel.isSelected(2) }"><a href ng-click="panel.selectTab(2)">Specs</a></li>
-        <li ng-class="{ active : panel.isSelected(3) }"><a href ng-click="panel.selectTab(3)">Revvs</a></li>
-        <li href ng-click="panel.selectTab(1)"><a href >{{panel.tab}}</a></li>
-      </ul>
-    
-
-      <div class="panel" ng-show="panel.isSelected(3)">
-
-        <h4>Reviews</h4>
-        <li ng-repeat="review in product.reviews">
-          <blockquote>
-            <b>Stars: {{review.stars}}</b>
-              {{review.body}}
-              <cite>by: {{review.author}} on {{review.createdOn | date:'MM/dd/yyyy @ h:mma'}}</cite>
-          </blockquote>
-        </li>
-
-        <form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
-          <select ng-model="reviewCtrl.review.stars" required>
-            <option value="1">1 star</option>
-            <option value="2">2 stars</option>
-            <option value="3">3 stars</option>
-            <option value="4">4 stars</option>
-            <option value="4">5 stars</option>
-          </select>
-
-          <textarea ng-model="reviewCtrl.review.body" required></textarea>
-          <label>by:</label>
-
-          <input name="author" ng-model="reviewCtrl.review.author" type="email" required/>
-
-          <div> reviewForm is {{reviewForm.$valid}}</div>
-          <input type="submit" value="Submit" />
-<!-- 
-          <input ng-model="reviewCtrl.review.color" type="radio" value="red">r</input>
-          <input ng-model="reviewCtrl.review.color" type="radio" value="green">g</input>
-          <input ng-model="reviewCtrl.review.color" type="radio" value="blue">b</input>
-
-          <input ng-model="reviewCtrl.review.terms" type="checkbox">i agree to terms</input> -->
-
-        </form>
-
-      </div>
-
-    </section>
+    <product-panel></product-panel>
 
   </div>
 
@@ -132,6 +85,7 @@
   <script type="text/javascript" src="js/jquery.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <script type="text/javascript" src="app.js"></script>
+  <script type="text/javascript" src="product-panel.js"></script>
 </body>
 
 </html>
